@@ -2,4 +2,5 @@ file 2 , commit 3
 file 2. commit 4, on branch feature
 can we meet tomorrow?
 new commit to check feature, acts as feature now
+adding second line to conflict, but now we are on master
 
