@@ -4,5 +4,9 @@ file 1, commit 5, merfe learn
 new merge
 new line od code
 
+
 conflict 1
 conflict 2
+
+conflict 1
+
