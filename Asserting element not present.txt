@@ -1,0 +1,54 @@
+ORDER SUMMARY PAGE TEST
+
+ //TC083-PRANALI
+    @Test(description = "TC083 Add comments in order summary page - Pranali")
+    public void addCommentsInOrderSummaryPage() throws IOException, InterruptedException {
+
+        String username = TestJsonGenerator.getDataForLogin("username");
+        String password = TestJsonGenerator.getDataForLogin("password");
+
+        LandingPage landingPage = new LandingPage(browserManager.getDriver());
+        LoginPage loginPage =landingPage
+                .navigateToWebsite()
+                .clickSignIn();
+        MyAccountPage myAccountPage =
+                loginPage
+                        .loginToApplication(username,password);
+        boolean status =myAccountPage.isSignOutPresentOnPage();
+        BaseAsserts.ShouldBeTrue(status,"SignOut Not displayed");
+
+        ProductPage productPage =
+                myAccountPage
+                        .clickButton();
+        productPage.clickImg()
+                .addItem();
+
+        OrderSummaryPage orderSummaryPage =
+                productPage
+                        .proceedToCheckout();
+        MyAddressesPage myAddressesPage =
+                orderSummaryPage
+                        .clickOnCheckoutOrderSummaryPage();
+        myAddressesPage
+                .commentBox()
+                .btnProceedToCheckout();
+  
+
+boolean verifyCommentIsNotPresent = orderSummaryPage.verifyCommentElementNotPresentOnShippingPage();
+        BaseAsserts.ShouldBeFalse(verifyCommentIsNotPresent,"Comment is Present") ;
+
+
+
+    }
+
+
+
+ORDERSUMMARY PAGE
+
+        public Boolean verifyCommentElementNotPresentOnShippingPage() throws IOException {
+            try {
+                return (!findElementBy("xpath", "shoppingCart.ShippingPage.commentNotPresent").isDisplayed());
+            } catch (Exception e) {
+                return false;
+            }
+        }
